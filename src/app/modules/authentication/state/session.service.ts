@@ -16,6 +16,9 @@ export class SessionService {
 
   registerUser(request: RegisterUserRequestModel): void {
     this.persistStorage.clearStore();
+
+    this.sessionStore.setLoading(true);
+
     this.userDataService.registerUser(request)
     .subscribe((userData: RegisterUserResponseModel) => {
       if (userData.token){
@@ -26,12 +29,13 @@ export class SessionService {
             UserData: userData
           };
         });
-
+        this.sessionStore.setLoading(false);
       }
 
     }, (err) => {
-
-      console.log(err);
+      // set the error state
+      this.sessionStore.setError(err);
+      this.sessionStore.setLoading(false);
 
     });
 
