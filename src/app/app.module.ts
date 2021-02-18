@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -13,9 +15,11 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
+    RouterModule,
+    AuthenticationModule,
     AppRoutingModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    AkitaNgRouterStoreModule,
+    AkitaNgRouterStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
