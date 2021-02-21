@@ -1,3 +1,4 @@
+import { SessionDataService } from './services/session-data.service';
 import { UserDataService } from './services/user-data.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { HttpTokenInterceptor } from './interceptors/http-token.interceptor';
       useClass: HttpTokenInterceptor,
       multi: true
     },
-    UserDataService
+    UserDataService,
+    SessionDataService
   ]
 })
 export class CoreModule { }
