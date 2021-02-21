@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     AuthenticationRoutingModule
   ]
 })
