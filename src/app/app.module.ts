@@ -13,11 +13,13 @@ import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './modules/main/main.component';
+import { TodoComponent } from './modules/todo/todo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
