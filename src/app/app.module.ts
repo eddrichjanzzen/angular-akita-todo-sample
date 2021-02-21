@@ -1,3 +1,4 @@
+import { SharedModule } from './modules/shared/shared.module';
 import { CustomMaterialModule } from './modules/custom-material/custom-material.module';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
@@ -16,12 +17,12 @@ import { MainComponent } from './modules/main/main.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     RouterModule,
-    CustomMaterialModule,
+    SharedModule,
     CoreModule,
     AuthenticationModule,
     AppRoutingModule,
