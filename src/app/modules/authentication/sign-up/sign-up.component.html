@@ -1,1 +1,93 @@
-<p>sign-up works!</p>
+<div class="content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+          <h1 class="header">SIGN UP</h1>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (click)="onSignUp" name="signUpForm" [formGroup]="signUpForm">
+
+        <div class="email-input">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="email"
+              type="email"
+              matInput
+              placeholder="Enter your email address"
+              required>
+            <mat-error *ngIf="signUpForm.get('email')?.errors?.required">
+              Email address is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="details-input">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Name</mat-label>
+            <input
+              formControlName="name"
+              type="text"
+              matInput
+              placeholder="Enter your name"
+              required>
+            <mat-error *ngIf="signUpForm.get('name')?.errors?.required">
+              Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="details-input">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Age</mat-label>
+            <input
+              formControlName="age"
+              type="number"
+              matInput
+              placeholder="Enter your age"
+              required>
+            <mat-error *ngIf="signUpForm.get('age')?.errors?.required">
+              Age is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="password-input">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Password</mat-label>
+            <input
+              formControlName="confirmPassword"
+              type="password"
+              matInput
+              placeholder="Enter your password"
+              type="password" required>
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Confirm Password</mat-label>
+            <input
+              formControlName="confirmPassword"
+              type="password"
+              matInput
+              placeholder="Confirm password"
+              type="password" required>
+              <mat-error *ngIf="signUpForm.errors?.matching">
+                Passwords must match.
+              </mat-error>
+          </mat-form-field>
+
+        </div>
+        <div>
+          <p>Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+        </div>
+
+        <button mat-flat-button color="primary">Sign up</button>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+

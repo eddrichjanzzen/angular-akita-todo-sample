@@ -1,0 +1,27 @@
+mat-card {
+  max-width: 600px;
+  max-height: 600px;
+  text-align: center;
+  margin: 2em auto;
+  padding: 50px 0;
+}
+
+mat-card-header {
+  justify-content: center;
+}
+
+.content {
+  background :#673ab7;
+  height: 80vh;
+  padding-top: 20vh;
+}
+
+
+.email-input {
+  padding-top: 10px;
+}
+
+.full-width {
+  width:80%;
+}
+
