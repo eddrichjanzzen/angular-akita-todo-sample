@@ -1,3 +1,4 @@
+import { SessionService } from './../state/session.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   hide: boolean;
 
-  constructor() {
+  constructor(private sessionService: SessionService) {
     this.hide = true;
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    if (!this.loginForm.valid){
-      return;
+    if (this.loginForm.valid){
+      this.sessionService.loginUser(this.loginForm.value);
     }
   }
 
