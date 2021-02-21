@@ -10,9 +10,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
-const modules = [
+const matModules = [
   MatToolbarModule,
   MatButtonModule,
   MatCardModule,
@@ -26,12 +26,14 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ...matModules
   ],
   exports: [
-    ...modules
+    matModules
   ]
 })
 export class CustomMaterialModule { }
