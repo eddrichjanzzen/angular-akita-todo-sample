@@ -1,8 +1,8 @@
 <div class="content">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>
-          <h1 class="header">SIGN UP</h1>
+      <mat-card-title class="header">
+        <div class="mat-display-3">SIGN UP</div>
       </mat-card-title>
     </mat-card-header>
 
@@ -59,11 +59,14 @@
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Password</mat-label>
             <input
-              formControlName="confirmPassword"
+              formControlName="password"
               type="password"
               matInput
               placeholder="Enter your password"
               type="password" required>
+              <mat-error *ngIf="signUpForm.get('password')?.errors?.required">
+                Password is required.
+              </mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width" appearance="standard">
@@ -74,17 +77,21 @@
               matInput
               placeholder="Confirm password"
               type="password" required>
-              <mat-error *ngIf="signUpForm.errors?.matching">
-                Passwords must match.
+              <mat-error *ngIf="signUpForm.get('confirmPassword')?.errors?.required">
+                Password is required.
               </mat-error>
           </mat-form-field>
 
+          <mat-error *ngIf="signUpForm.get('password')?.errors?.matching">
+            Passwords must match
+          </mat-error>
+
         </div>
         <div>
-          <p>Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+          <p class="mat-body-2">Aleady have an account? <a routerLink="/">Login</a></p>
         </div>
 
-        <button mat-flat-button color="primary">Sign up</button>
+        <button mat-raised-button color="primary">Sign up</button>
       </form>
 
     </mat-card-content>
