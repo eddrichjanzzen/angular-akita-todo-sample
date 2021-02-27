@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api-nodejs-todolist.herokuapp.com'
+  apiUrl: 'https://app-drf-todo-api.herokuapp.com/api'
 };
