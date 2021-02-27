@@ -9,88 +9,59 @@
     <mat-card-content>
       <form (click)="onSignUp" name="signUpForm" [formGroup]="signUpForm">
 
-        <div class="email-input">
-          <mat-form-field class="full-width" appearance="standard">
-            <mat-label>Email</mat-label>
-            <input
-              formControlName="email"
-              type="email"
-              matInput
-              placeholder="Enter your email address"
-              required>
-            <mat-error *ngIf="signUpForm.get('email')?.errors?.required">
-              Email address is required.
-            </mat-error>
-          </mat-form-field>
+        <div class="form-container">
+          <div class="email-input">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                formControlName="email"
+                type="email"
+                matInput
+                placeholder="Enter your email address"
+                >
+            </mat-form-field>
+          </div>
+
+          <div class="details-input">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Display Name</mat-label>
+              <input
+                formControlName="display_name"
+                type="text"
+                matInput
+                placeholder="Enter your age"
+                >
+            </mat-form-field>
+          </div>
+
+          <div class="password-inputs">
+
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                formControlName="password"
+                type="password"
+                matInput
+                placeholder="Enter your password"
+                type="password"
+              >
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input
+                formControlName="confirmPassword"
+                type="password"
+                matInput
+                placeholder="Confirm password"
+              >
+            </mat-form-field>
+
+          </div>
+          <div>
+            <p class="mat-body-2">Aleady have an account? <a routerLink="/">Login</a></p>
+          </div>
         </div>
-
-        <div class="details-input">
-          <mat-form-field class="full-width" appearance="standard">
-            <mat-label>Name</mat-label>
-            <input
-              formControlName="name"
-              type="text"
-              matInput
-              placeholder="Enter your name"
-              required>
-            <mat-error *ngIf="signUpForm.get('name')?.errors?.required">
-              Name is required.
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-
-        <div class="details-input">
-          <mat-form-field class="full-width" appearance="standard">
-            <mat-label>Age</mat-label>
-            <input
-              formControlName="age"
-              type="number"
-              matInput
-              placeholder="Enter your age"
-              required>
-            <mat-error *ngIf="signUpForm.get('age')?.errors?.required">
-              Age is required.
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="password-input">
-          <mat-form-field class="full-width" appearance="standard">
-            <mat-label>Password</mat-label>
-            <input
-              formControlName="password"
-              type="password"
-              matInput
-              placeholder="Enter your password"
-              type="password" required>
-              <mat-error *ngIf="signUpForm.get('password')?.errors?.required">
-                Password is required.
-              </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="standard">
-            <mat-label>Confirm Password</mat-label>
-            <input
-              formControlName="confirmPassword"
-              type="password"
-              matInput
-              placeholder="Confirm password"
-              type="password" required>
-              <mat-error *ngIf="signUpForm.get('confirmPassword')?.errors?.required">
-                Password is required.
-              </mat-error>
-          </mat-form-field>
-
-          <mat-error *ngIf="signUpForm.get('password')?.errors?.matching">
-            Passwords must match
-          </mat-error>
-
-        </div>
-        <div>
-          <p class="mat-body-2">Aleady have an account? <a routerLink="/">Login</a></p>
-        </div>
-
         <button mat-raised-button color="primary">Sign up</button>
       </form>
 

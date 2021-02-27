@@ -11,11 +11,10 @@ export class SignUpComponent implements OnInit {
 
   constructor() {
     this.signUpForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      name : new FormControl('', [Validators.required, Validators.minLength(6)]),
-      age: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), this.checkIfMatchingPasswords]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), this.checkIfMatchingPasswords])
+      email: new FormControl('', [Validators.email]),
+      display_name: new FormControl('', Validators.minLength(6)),
+      password: new FormControl('', [Validators.minLength(6)]),
+      confirmPassword: new FormControl('', [Validators.minLength(6)])
     });
   }
 
@@ -26,14 +25,6 @@ export class SignUpComponent implements OnInit {
     if (!this.signUpForm.valid){
       return;
     }
-  }
-
-  private checkIfMatchingPasswords(formGroup: FormGroup): ValidationErrors | null {
-    const password = formGroup.get('password');
-    const confirmPassword = formGroup.get('confirmPassword');
-
-    return password?.value !== '' && confirmPassword?.value !== ''
-      && password?.value !== confirmPassword?.value ? { matching: true } : null;
   }
 
 }
