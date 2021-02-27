@@ -23,7 +23,7 @@ export class SessionService {
 
     this.userDataService.registerUser(request)
     .subscribe((userData: RegisterUserResponseModel) => {
-      if (userData.token){
+      if (userData?.tokens){
         // update the session store here
         this.sessionStore.register(userData);
         this.sessionStore.setLoading(false);
@@ -46,7 +46,7 @@ export class SessionService {
 
     this.userDataService.loginUser(request)
     .subscribe((userData: LoginUserResponseModel) => {
-      if (userData.token !== null){
+      if (userData?.tokens !== null){
 
         // update the session store here
         this.sessionStore.login(userData);
