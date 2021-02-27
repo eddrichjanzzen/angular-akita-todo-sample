@@ -1,24 +1,26 @@
+import { TokenModel } from './token.model';
+
 export interface UserModel {
-  _id: string;
-  name: string;
+  id: string;
+  display_name: string;
   email: string;
-  password: string;
-  age: number;
-  createdAt: Date;
-  updatedAt: Date;
-  __v: number;
+  created_date: Date;
+  updated_date: Date;
+  avatar: string;
+}
+
+export interface UserSessionModel extends UserModel {
+  tokens: TokenModel;
 }
 
 export interface RegisterUserRequestModel {
-  name: string;
+  display_name: string;
   email: string;
   password: string;
-  age: number;
 }
 
-export interface RegisterUserResponseModel {
-  user: UserModel;
-  token: string;
+export interface RegisterUserResponseModel extends UserModel {
+  tokens: TokenModel;
 }
 
 export interface LoginUserRequestModel {
@@ -26,17 +28,13 @@ export interface LoginUserRequestModel {
   password: string;
 }
 
-export interface LoginUserResponseModel{
-  user: UserModel;
-  token: string;
+export interface LoginUserResponseModel extends UserModel{
+  tokens: TokenModel;
  }
 
-export interface LogoutUserResponseModel {
-  success: boolean;
-}
 
 export interface UpdateUserRequestModel {
-  age: number;
+  display_name: number;
 }
 
 export interface UpdateUserResponseModel{

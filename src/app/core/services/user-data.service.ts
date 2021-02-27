@@ -1,7 +1,6 @@
 import {
   LoginUserRequestModel,
   LoginUserResponseModel,
-  LogoutUserResponseModel,
   UserModel,
   UpdateUserRequestModel,
   UpdateUserResponseModel
@@ -19,15 +18,11 @@ export class UserDataService {
   constructor(private http: ApiHttpService) { }
 
   registerUser(request: RegisterUserRequestModel): Observable<RegisterUserResponseModel>{
-    return this.http.post('/user/register', request);
+    return this.http.post('/user/signup', request);
   }
 
   loginUser(request: LoginUserRequestModel): Observable<LoginUserResponseModel>{
     return this.http.post('/user/login', request);
-  }
-
-  logoutUser(): Observable<LogoutUserResponseModel>{
-    return this.http.post('/user/logout', {});
   }
 
   getUser(): Observable<UserModel>{
