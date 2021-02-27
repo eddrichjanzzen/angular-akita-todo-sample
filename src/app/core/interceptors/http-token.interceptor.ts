@@ -10,23 +10,25 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const headersConfig = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Authorization: 'None'
-    };
-
     const session = this.sessionDataService.getSession();
 
     if (session !== 'null' && session) {
 
       const token = JSON.parse(session).Token;
+      // clone and set the header
+      const clone: HttpRequest<any> = req.clone({
+        headers: req.headers
+        .set('Authorization',  `Bearer ${token}`)
+      });
 
-      headersConfig.Authorization = `Bearer ${token}`;
+      return next.handle(clone);
 
     }
 
-    const request = req.clone({ setHeaders: headersConfig });
-    return next.handle(request);
+    return next.handle(req);
   }
 }
+
+
+
+
