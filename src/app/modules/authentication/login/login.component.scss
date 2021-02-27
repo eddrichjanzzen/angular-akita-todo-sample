@@ -4,20 +4,14 @@ mat-card {
   text-align: center;
   margin: 2em auto;
   padding: 50px 0;
+  border: 1px solid lightgrey;
 }
 
 mat-card-header {
   justify-content: center;
 }
 
-.content {
-  background :#673ab7;
-  height: 70vh;
-  padding-top:30vh;
-}
-
 
 .full-width {
   width:80%;
 }
-

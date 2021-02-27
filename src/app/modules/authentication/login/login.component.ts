@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(private sessionService: SessionService) {
     this.hide = true;
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      email: new FormControl('', [Validators.email]),
+      password: new FormControl('', [Validators.minLength(6)])
     });
   }
 
