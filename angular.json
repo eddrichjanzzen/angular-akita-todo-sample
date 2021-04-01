@@ -132,6 +132,6 @@
   "defaultProject": "angular-akita-todo-sample",
   "cli": {
     "analytics": "b0c5e76d-138d-47a5-b332-70f6c82d2040",
-    "defaultCollection": "@datorama/akita"
+    "defaultCollection": "akita-schematics"
   }
 }
