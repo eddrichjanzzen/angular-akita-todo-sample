@@ -12,9 +12,9 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
     const session = this.sessionDataService.getSession();
 
-    if (session !== 'null' && session) {
+    if (session !== 'null' && session && session !== undefined) {
 
-      const token = JSON.parse(session).Token;
+      const token = JSON.parse(session).tokens.access;
       // clone and set the header
       const clone: HttpRequest<any> = req.clone({
         headers: req.headers
@@ -28,7 +28,3 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     return next.handle(req);
   }
 }
-
-
-
-
