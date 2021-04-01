@@ -1,8 +1,9 @@
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthenticationComponent } from './../authentication/authentication.component';
 import { MainComponent } from './main.component';
 import { TodoComponent } from './todo/todo.component';
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 
 
 const routes: Routes = [
@@ -16,9 +17,15 @@ const routes: Routes = [
         loadChildren: () => import('./../authentication/authentication.module').then(m => m.AuthenticationModule)
       },
       {
-        path: 'todos',
-        component: TodoComponent,
-        loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
+        path: '',
+        component: NavbarComponent,
+        children : [
+          {
+            path: 'todos',
+            component: TodoComponent,
+            loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
+          }
+        ]
       }
     ]
   }
