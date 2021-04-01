@@ -1,12 +1,15 @@
 <div class="content">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title class="header">
-        <div class="mat-display-2">LOGIN</div>
-      </mat-card-title>
-    </mat-card-header>
 
+  <mat-card>
+    <ng-container *ngIf="(isLoading$ | async)">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-container>
     <mat-card-content>
+      <mat-card-header>
+        <mat-card-title class="header">
+          <div class="mat-display-2">LOGIN</div>
+        </mat-card-title>
+      </mat-card-header>
       <form (click)="onLogin()" name="loginForm" [formGroup]="loginForm">
 
         <div class="email-input">
