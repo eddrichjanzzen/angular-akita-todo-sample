@@ -10,7 +10,7 @@
           <div class="mat-display-2">LOGIN</div>
         </mat-card-title>
       </mat-card-header>
-      <form (click)="onLogin()" name="loginForm" [formGroup]="loginForm">
+      <form name="loginForm" [formGroup]="loginForm">
 
         <div class="email-input">
           <mat-form-field class="full-width" appearance="outline">
@@ -44,7 +44,7 @@
 
         </div>
 
-        <button mat-raised-button color="primary">Login</button>
+        <button mat-raised-button color="primary" (click)="onLogin()">Login</button>
       </form>
 
     </mat-card-content>
