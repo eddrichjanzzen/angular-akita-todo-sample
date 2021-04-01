@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
 import { SessionService } from './../state/session.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SessionQuery } from '../state/session.query';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +12,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  isLoading$: Observable<boolean>;
   hide: boolean;
 
-  constructor(private sessionService: SessionService) {
+  constructor(private sessionService: SessionService,
+              private sessionQuery: SessionQuery) {
     this.hide = true;
+    this.isLoading$ = this.sessionQuery.selectLoading();
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.minLength(6)])
@@ -21,7 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   onLogin(): void {
