@@ -1,3 +1,4 @@
+import { ToastrService } from './services/toastr.service';
 import { SessionDataService } from './services/session-data.service';
 import { UserDataService } from './services/user-data.service';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,8 @@ import { HttpTokenInterceptor } from './interceptors/http-token.interceptor';
       multi: true
     },
     UserDataService,
-    SessionDataService
+    SessionDataService,
+    ToastrService
   ]
 })
 export class CoreModule { }
