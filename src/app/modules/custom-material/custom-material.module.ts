@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const matModules = [
   MatToolbarModule,
@@ -26,7 +27,8 @@ const matModules = [
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatFormFieldModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatCheckboxModule
 ];
 
 @NgModule({
