@@ -1,3 +1,4 @@
+import { ToastrService } from './../../../core/services/toastr.service';
 import { RegisterUserRequestModel, RegisterUserResponseModel, LoginUserRequestModel, LoginUserResponseModel } from './../../../core/models/user.model';
 import { UserDataService } from './../../../core/services/user-data.service';
 import { Inject, Injectable } from '@angular/core';
@@ -6,11 +7,14 @@ import { SessionStore } from './session.store';
 import { PersistState } from '@datorama/akita';
 import { Router } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Injectable({ providedIn: 'root' })
 export class SessionService {
 
   constructor(private sessionStore: SessionStore,
               private userDataService: UserDataService,
+              private toastrService: ToastrService,
               private router: Router,
               @Inject('persistStorage') private persistStorage: PersistState,
               ) {
@@ -18,7 +22,6 @@ export class SessionService {
 
   registerUser(request: RegisterUserRequestModel): void {
     this.persistStorage.clearStore();
-
     this.sessionStore.setLoading(true);
 
     this.userDataService.registerUser(request)
@@ -41,7 +44,6 @@ export class SessionService {
 
   loginUser(request: LoginUserRequestModel): void {
     this.persistStorage.clearStore();
-
     this.sessionStore.setLoading(true);
 
     this.userDataService.loginUser(request)
@@ -54,10 +56,12 @@ export class SessionService {
         this.router.navigateByUrl('/todos');
       }
 
-    }, (err) => {
+    }, (err: any) => {
       // set the error state
       this.sessionStore.setError(err);
       this.sessionStore.setLoading(false);
+      this.toastrService.open(err.error.detail, 'x');
+
 
     });
 
