@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const matModules = [
   MatToolbarModule,
@@ -22,6 +23,7 @@ const matModules = [
   MatMenuModule,
   MatIconModule,
   MatProgressSpinnerModule,
+  MatProgressBarModule,
   MatFormFieldModule
 ];
 
