@@ -17,9 +17,11 @@ export class TodoItemComponent implements OnInit {
   }
 
   toggle(todoItem: TodoModel): void {
-    this.todoService.updateTodo(todoItem.id, todoItem);
-    console.log("toggled")
-    // alert("toggled");
+
+    // use spread syntx to create a new copy of the object
+    var updatedTodo = { ...todoItem, completed: !todoItem.completed}
+
+    this.todoService.updateTodo(todoItem.id, updatedTodo);
   }
 
 
