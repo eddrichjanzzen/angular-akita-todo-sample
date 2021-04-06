@@ -4,3 +4,8 @@ export interface PaginatedResponseModel<T> {
   previous: string;
   results: Array<T>;
 }
+
+export interface ResponseModel<T> {
+  data: T;
+  success: boolean;
+}
