@@ -1,5 +1,8 @@
 <mat-card class="todo-item">
-  <mat-checkbox></mat-checkbox>
+  <mat-checkbox 
+    [checked]="todoItem.completed"
+    (click)="toggle(todoItem)"
+  ></mat-checkbox>
   <mat-card-header class="item-header">
     <mat-card-title>{{todoItem.title}}</mat-card-title>
     <mat-card-subtitle>{{todoItem.description}}</mat-card-subtitle>

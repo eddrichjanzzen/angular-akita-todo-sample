@@ -1,4 +1,4 @@
-import { GetAllTodosResponseModel } from 'src/app/core/models/todo.model';
+import { GetAllTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
 import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
 import { HttpClient } from '@angular/common/http';
@@ -30,4 +30,23 @@ export class TodoService {
 
     });
   }
+
+  updateTodo(todoId: string, todoItem: TodoModel): void {
+    
+    this.todoDataService.updateTodo(todoId, todoItem)
+    .subscribe((response: UpdateTodoResponseModel)=> {
+      // update with the updated data 
+      if(response.success){
+        console.log(response);
+        this.todoStore.update(todoId, response.data);
+      }
+
+    }, (err)=>{
+      // set the error state
+      this.todoStore.setError(err);
+      this.todoStore.setLoading(false);
+    })
+  }
+
+
 }
