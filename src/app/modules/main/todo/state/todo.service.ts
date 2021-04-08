@@ -32,7 +32,6 @@ export class TodoService {
   }
 
   updateTodo(todoId: string, todoItem: TodoModel): void {
-    
     this.todoDataService.updateTodo(todoId, todoItem)
     .subscribe((response: UpdateTodoResponseModel)=> {
       // update with the updated data 
