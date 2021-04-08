@@ -1,8 +1,18 @@
 
 <div class="todo-list">
-  <ng-container *ngFor="let todo of todos$ | async">
-    <app-todo-item [todoItem]="todo"></app-todo-item>
+
+  <ng-container *ngIf="!(isLoading$ | async); else isLoadingTmp">
+
+    <ng-container *ngFor="let todo of todos$ | async">
+      <app-todo-item [todoItem]="todo"></app-todo-item>
+    </ng-container>
+
   </ng-container>
+  <ng-template #isLoadingTmp>
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </div>
 
 
