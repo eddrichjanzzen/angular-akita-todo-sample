@@ -7,8 +7,6 @@ import { SessionStore } from './session.store';
 import { PersistState } from '@datorama/akita';
 import { Router } from '@angular/router';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 @Injectable({ providedIn: 'root' })
 export class SessionService {
 
@@ -65,6 +63,12 @@ export class SessionService {
 
     });
 
+  }
+
+  logout(){
+    this.persistStorage.clearStore();
+    this.sessionStore.clearState();
+    this.router.navigateByUrl('/');
   }
 
 }

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Store, StoreConfig } from '@datorama/akita';
-import { TokenModel } from 'src/app/core/models/token.model';
+import { akitaConfig, Store, StoreConfig } from '@datorama/akita';
 import { RegisterUserResponseModel, UserSessionModel, LoginUserResponseModel } from 'src/app/core/models/user.model';
 import * as storage from './storage';
+import { resetStores } from "@datorama/akita";
+
+akitaConfig({ resettable: true });
 
 export interface SessionState {
   UserSession: UserSessionModel;
@@ -55,6 +57,7 @@ export class SessionStore extends Store<SessionState> {
 
   clearState(): void {
     storage.clearSession();
+    resetStores();
     this.update(createInitialState());
   }
 
