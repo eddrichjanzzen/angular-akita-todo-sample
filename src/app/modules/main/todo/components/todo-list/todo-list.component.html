@@ -1,6 +1,5 @@
 
 <div class="todo-list">
-
   <ng-container *ngIf="!(isLoading$ | async); else isLoadingTmp">
 
     <ng-container *ngFor="let todo of todos$ | async">
