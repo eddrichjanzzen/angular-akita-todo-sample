@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ApiHttpService } from './api-http.service';
-import { GetAllTodosResponseModel, 
+import { AddTodoRequestModel, AddTodoResponseModel, GetAllTodosResponseModel, 
          UpdateTodoRequestModel, UpdateTodoResponseModel } 
 from '../models/todo.model';
 
@@ -21,5 +21,8 @@ export class TodoDataService {
     return this.http.put(`/task/${todoId}`, request);
   }
 
+  addTodo(request: AddTodoRequestModel): Observable<AddTodoResponseModel>{
+    return this.http.post('/task', request);
+  }
 
 }

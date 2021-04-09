@@ -1,16 +1,18 @@
-import { GetAllTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
+import { AddTodoResponseModel, GetAllTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
 import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
 import { HttpClient } from '@angular/common/http';
 import { TodoStore } from './todo.store';
 import { TodoDataService } from 'src/app/core/services/todo-data-service';
+import { ToastrService } from 'src/app/core/services/toastr.service';
 
 
 @Injectable({ providedIn: 'root' })
 export class TodoService {
 
   constructor(private todoStore: TodoStore,
-              private todoDataService: TodoDataService) {
+              private todoDataService: TodoDataService,
+              private toastrService: ToastrService) {
   }
 
   fetchAllTodos(): void {
@@ -29,6 +31,22 @@ export class TodoService {
       this.todoStore.setLoading(false);
 
     });
+  }
+
+  addTodo(todoItem: TodoModel): void {
+    this.todoDataService.addTodo(todoItem)
+    .subscribe((response: AddTodoResponseModel)=> {
+      // update with the updated data 
+      if(response.success){
+        this.todoStore.add(todoItem, { prepend: true });
+        this.toastrService.open("Successfully added item", "x");
+      }
+
+    }, (err)=>{
+      // set the error state
+      this.todoStore.setError(err);
+      this.todoStore.setLoading(false);
+    })
   }
 
   updateTodo(todoId: string, todoItem: TodoModel): void {

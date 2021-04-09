@@ -14,3 +14,7 @@ export interface GetAllTodosResponseModel extends PaginatedResponseModel<TodoMod
 export interface UpdateTodoRequestModel extends TodoModel { }
 
 export interface UpdateTodoResponseModel extends ResponseModel<TodoModel> { }
+
+export interface AddTodoRequestModel extends TodoModel { }
+
+export interface AddTodoResponseModel extends ResponseModel<TodoModel> { }
