@@ -1,10 +1,22 @@
 <div class="add-todo">
-	<mat-form-field class="full-width" appearance="outline">
-		<input
-			type="text"
-			matInput
-			placeholder="Press 'Enter' to add an Item"
-		>
-	</mat-form-field>
-	<button mat-raised-button color="primary">Add Item</button>
+	<form [formGroup]="addTodoForm">
+		<mat-form-field class="full-width" appearance="outline">
+			<input
+				type="text"
+				matInput
+				formControlName="title"
+				placeholder="Press 'Enter' to add an Item"
+			>
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>Choose a date</mat-label>
+			<input matInput 
+				[matDatepicker]="picker"
+				formControlName="deadline"
+			>
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+		<button mat-raised-button color="primary" (click)="onClickAddTodo()">Add Item</button>
+	</form>
 </div>

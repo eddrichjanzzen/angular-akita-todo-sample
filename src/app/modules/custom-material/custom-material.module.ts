@@ -13,7 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const matModules = [
   MatToolbarModule,
@@ -28,7 +30,9 @@ const matModules = [
   MatProgressBarModule,
   MatFormFieldModule,
   MatSnackBarModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatNativeDateModule,
+  MatDatepickerModule
 ];
 
 @NgModule({
