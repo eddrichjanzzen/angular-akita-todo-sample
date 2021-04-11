@@ -9,7 +9,14 @@ export interface TodoModel {
   completed: boolean;
 }
 
-export interface GetAllTodosResponseModel extends PaginatedResponseModel<TodoModel>{ }
+export interface SearchTodosRequestModel {
+  // all optional
+  page: number;
+  title?: string;
+  completed?: boolean; 
+}
+
+export interface SearchTodosResponseModel extends PaginatedResponseModel<TodoModel>{ }
 
 export interface UpdateTodoRequestModel extends TodoModel { }
 

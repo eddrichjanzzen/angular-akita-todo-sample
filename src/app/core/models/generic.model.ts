@@ -1,3 +1,8 @@
+export interface PaginationRequestModel {
+  page: number
+}
+
+
 export interface PaginatedResponseModel<T> {
   count: number;
   next: string;
@@ -9,3 +14,4 @@ export interface ResponseModel<T> {
   data: T;
   success: boolean;
 }
+

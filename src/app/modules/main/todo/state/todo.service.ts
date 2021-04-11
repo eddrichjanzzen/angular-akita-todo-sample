@@ -1,10 +1,13 @@
-import { AddTodoResponseModel, GetAllTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
+import { AddTodoResponseModel, SearchTodosRequestModel, SearchTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
+import { ID, PaginationResponse } from '@datorama/akita';
 import { HttpClient } from '@angular/common/http';
 import { TodoStore } from './todo.store';
 import { TodoDataService } from 'src/app/core/services/todo-data-service';
 import { ToastrService } from 'src/app/core/services/toastr.service';
+import { Observable } from 'rxjs';
+import PaginationHelper from 'src/app/core/helper/pagination.helper';
+import { catchError, map, take } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,11 +18,28 @@ export class TodoService {
               private toastrService: ToastrService) {
   }
 
-  fetchAllTodos(): void {
+
+  fetchTodosByPage(request:SearchTodosRequestModel) : Observable<PaginationResponse<TodoModel>> {
+    return this.todoDataService.search(request).pipe(
+        map((value:SearchTodosResponseModel) => {
+          return PaginationHelper.transfomToAkitaPaginationMapper(value, request, "id");
+        }),
+        catchError((err, caught) => {
+            this.toastrService.open("We couldn't fetch clients data. Please try again. If this continues, please contact us at support@cabana.swayseast.com.", "Uh oh.");
+
+            return caught;
+        }),
+        take(1)
+    );
+  }
+
+
+
+  searchTodos(request: SearchTodosRequestModel): void {
 
     this.todoStore.setLoading(true);
-    this.todoDataService.getAllTodos()
-    .subscribe((todos: GetAllTodosResponseModel) => {
+    this.todoDataService.search(request)
+    .subscribe((todos: SearchTodosResponseModel) => {
 
         // update the todo store here, set to the results
         this.todoStore.set(todos.results);
@@ -34,7 +54,7 @@ export class TodoService {
   }
 
   addTodo(todoItem: TodoModel): void {
-    this.todoDataService.addTodo(todoItem)
+    this.todoDataService.create(todoItem)
     .subscribe((response: AddTodoResponseModel)=> {
       // update with the updated data 
       if(response.success){
@@ -50,7 +70,7 @@ export class TodoService {
   }
 
   updateTodo(todoId: string, todoItem: TodoModel): void {
-    this.todoDataService.updateTodo(todoId, todoItem)
+    this.todoDataService.update(todoId, todoItem)
     .subscribe((response: UpdateTodoResponseModel)=> {
       // update with the updated data 
       if(response.success){

@@ -1,8 +1,12 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TodoService } from '../../state/todo.service';
 import { TodoModel } from 'src/app/core/models/todo.model';
 import { TodoQuery } from '../../state/todo.query';
+import { TODO_PAGINATOR } from '../../state/todo.paginator';
+import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
+import { TodoState } from '../../state/todo.store';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,17 +15,27 @@ import { TodoQuery } from '../../state/todo.query';
 })
 export class TodoListComponent implements OnInit {
 
-  todos$: Observable<Array<TodoModel>>;
+  // todos$: Observable<Array<TodoModel>>;
   isLoading$: Observable<boolean>;
+  todos$: Observable<PaginationResponse<TodoModel>>;
 
-  constructor(private todoService: TodoService,
+  constructor(@Inject(TODO_PAGINATOR)
+              public todoPaginator: PaginatorPlugin<TodoState>,
+              private todoService: TodoService,
               private todoQuery: TodoQuery) { }
 
   ngOnInit(): void {
-    this.todoService.fetchAllTodos();
 
-    this.todos$ = this.todoQuery.selectAll();
-    this.isLoading$ = this.todoQuery.selectLoading();
+    this.isLoading$ = this.todoPaginator.isLoading$;
+  
+    this.todos$ = this.todoPaginator.pageChanges.pipe(
+      switchMap((page:number) => {
+        const requestFn = () => this.todoService.fetchTodosByPage({
+          page: page
+        });
+        return <Observable<PaginationResponse<TodoModel>>> this.todoPaginator.getPage(requestFn);
+      })
+    )
   }
 
 }
