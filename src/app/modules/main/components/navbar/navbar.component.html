@@ -1,6 +1,11 @@
-<mat-toolbar color="primary">
-  <span>My Todos</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button (click)="logout()">Logout</button>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<div class="main-nav">
+  <mat-toolbar color="primary">
+    <span>My Todos</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button (click)="logout()">Logout</button>
+  </mat-toolbar>
+</div>
+<div class="main-container">
+  <router-outlet></router-outlet>
+</div>
+
