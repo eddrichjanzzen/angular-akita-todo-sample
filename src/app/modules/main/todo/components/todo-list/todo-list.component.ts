@@ -15,9 +15,9 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TodoListComponent implements OnInit {
 
-  // todos$: Observable<Array<TodoModel>>;
   isLoading$: Observable<boolean>;
-  todos$: Observable<PaginationResponse<TodoModel>>;
+  todos$: Observable<Array<TodoModel>>;
+
 
   constructor(@Inject(TODO_PAGINATOR)
               public todoPaginator: PaginatorPlugin<TodoState>,
@@ -25,17 +25,23 @@ export class TodoListComponent implements OnInit {
               private todoQuery: TodoQuery) { }
 
   ngOnInit(): void {
+    this.fetchTodos();
+    this.isLoading$ = this.todoQuery.selectLoading();
+    this.todos$ = this.todoQuery.selectAll();
 
-    this.isLoading$ = this.todoPaginator.isLoading$;
-  
-    this.todos$ = this.todoPaginator.pageChanges.pipe(
-      switchMap((page:number) => {
-        const requestFn = () => this.todoService.fetchTodosByPage({
-          page: page
-        });
-        return <Observable<PaginationResponse<TodoModel>>> this.todoPaginator.getPage(requestFn);
-      })
-    )
   }
+
+  onScroll() {
+    this.fetchTodos();
+  }
+
+  private fetchTodos() {
+    if (this.todoQuery.getHasMore()) {
+      this.todoService.searchTodos({
+        page: this.todoQuery.getPageNumber()
+      });
+    }
+  }
+
 
 }

@@ -8,6 +8,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { TodoInboxComponent } from './pages/todo-inbox/todo-inbox.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { TodoInboxComponent } from './pages/todo-inbox/todo-inbox.component';
   imports: [
     CommonModule,
     SharedModule,
+    InfiniteScrollModule,
     TodoRoutingModule
   ]
 })
