@@ -1,8 +1,13 @@
 .todo-item {
-  margin: 1.5em auto;
+  margin: auto;
+  margin-bottom: 1.5em;
   border: 1px solid lightgrey;
 }
 
 .item-header {
   display: inline-block;
+}
+
+.delete-button {
+  float: right;
 }

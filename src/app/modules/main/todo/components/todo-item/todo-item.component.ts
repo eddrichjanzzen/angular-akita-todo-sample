@@ -23,5 +23,9 @@ export class TodoItemComponent implements OnInit {
     this.todoService.updateTodo(todoItem.id, updatedTodo);
   }
 
+  delete(): void{
+
+  }
+
 
 }
