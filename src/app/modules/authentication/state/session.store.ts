@@ -20,8 +20,8 @@ export function createInitialState(): SessionState {
       created_date: new Date(),
       updated_date: new Date(),
       tokens: {
-        access: '',
-        refresh: ''
+        access: undefined,
+        refresh: undefined
       }
     },
   };
