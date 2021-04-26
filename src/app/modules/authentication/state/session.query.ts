@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class SessionQuery extends Query<SessionState> {
 
-  checkToken$ = this.select((state) => toBoolean(state.UserSession?.tokens));
+  checkToken$ = this.select((state) => toBoolean(state.UserSession.tokens?.access !== ''));
   displayName$ = this.select((state) => state.UserSession.display_name);
 
   isLoggedIn$ = this.checkToken$.pipe(take(1));

@@ -7,7 +7,7 @@ import { TodoDataService } from 'src/app/core/services/todo-data-service';
 import { ToastrService } from 'src/app/core/services/toastr.service';
 import { Observable } from 'rxjs';
 import PaginationHelper from 'src/app/core/helper/pagination.helper';
-import { catchError, map, take } from 'rxjs/operators';
+import { catchError, debounceTime, map, take } from 'rxjs/operators';
 import { PaginatedResponseModel } from 'src/app/core/models/generic.model';
 
 
@@ -30,16 +30,12 @@ export class TodoService {
 
   @transaction()
   private updateTodos(response: SearchTodosResponseModel) {
-
     this.todoStore.add(response.results);
     if(response.next){
       const nextPage = parseInt(response.next.split('=')[1]);
       this.todoStore.updatePage({ hasMore: true, pageNumber: nextPage });
       this.todoStore.setLoading(false);
     }
-
-    this.todoStore.setLoading(false);
-
   }
 
   addTodo(todoItem: TodoModel): void {
@@ -47,7 +43,7 @@ export class TodoService {
     .subscribe((response: AddTodoResponseModel)=> {
       // update with the updated data 
       if(response.success){
-        this.todoStore.add(todoItem, { prepend: true });
+        this.todoStore.add(response.data, { prepend: true });
         this.toastrService.open("Successfully added item", "x");
       }
 

@@ -4,6 +4,8 @@ import { MainComponent } from './main.component';
 import { TodoComponent } from './todo/todo.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
+import { UnAuthGuard } from 'src/app/core/guards/un-auth.guard';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -14,7 +16,8 @@ const routes: Routes = [
       {
         path: '',
         component: AuthenticationComponent,
-        loadChildren: () => import('./../authentication/authentication.module').then(m => m.AuthenticationModule)
+        loadChildren: () => import('./../authentication/authentication.module').then(m => m.AuthenticationModule),
+        canActivate: [UnAuthGuard]
       },
       {
         path: '',
@@ -25,7 +28,8 @@ const routes: Routes = [
             component: TodoComponent,
             loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
           }
-        ]
+        ],
+        canActivate: [AuthGuard]
       }
     ]
   }
