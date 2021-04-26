@@ -10,7 +10,7 @@ export interface UserModel {
 }
 
 export interface UserSessionModel extends UserModel {
-  tokens?: TokenModel;
+  tokens: TokenModel;
 }
 
 export interface RegisterUserRequestModel {
