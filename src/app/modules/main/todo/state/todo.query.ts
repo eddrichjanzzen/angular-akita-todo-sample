@@ -13,11 +13,11 @@ export class TodoQuery extends QueryEntity<TodoState, TodoModel> {
   }
 
   getHasMore() {
-    return this.store.getValue().hasMore;
+    return this.getValue().hasMore;
   }
 
   getPageNumber() {
-    return this.store.getValue().pageNumber;
+    return this.getValue().pageNumber;
   }
 
 

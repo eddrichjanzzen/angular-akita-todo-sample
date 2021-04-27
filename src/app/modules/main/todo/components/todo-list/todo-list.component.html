@@ -5,7 +5,7 @@
     [infiniteScrollThrottle]="50"
     (scrolled)="onScroll()">
       <ng-container *ngIf="(todos$ | async) as todos">
-          <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"></app-todo-item>
+          <app-todo-item *ngFor="let todo of (todos$ | async)" [todoItem]="todo"></app-todo-item>
       </ng-container>
    </div>
    <ng-container *ngIf="(isLoading$ | async)">

@@ -19,23 +19,23 @@ export class TodoService {
               private toastrService: ToastrService) {
   }
 
-
   searchTodos(request:SearchTodosRequestModel) {
     this.todoStore.setLoading(true);
     this.todoDataService.search(request)
     .subscribe((response: SearchTodosResponseModel) => {
-      this.updateTodos(response);
+      this.updateTodoStore(response);
     });
   }
 
   @transaction()
-  private updateTodos(response: SearchTodosResponseModel) {
-    this.todoStore.add(response.results);
-    if(response.next){
-      const nextPage = parseInt(response.next.split('=')[1]);
-      this.todoStore.updatePage({ hasMore: true, pageNumber: nextPage });
+  private updateTodoStore(response: SearchTodosResponseModel) {
+    if(response.next !== null){
+      const currentPage = parseInt(response.next.split('=')[1])
+      const nextPage = currentPage + 1;
+      this.todoStore.add(response.results);
+      this.todoStore.updatePage({ hasMore: !!response.next, pageNumber: nextPage });
       this.todoStore.setLoading(false);
-    }
+    } 
   }
 
   addTodo(todoItem: TodoModel): void {

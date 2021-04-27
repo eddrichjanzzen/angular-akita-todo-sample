@@ -17,7 +17,7 @@ const routes: Routes = [
         path: '',
         component: AuthenticationComponent,
         loadChildren: () => import('./../authentication/authentication.module').then(m => m.AuthenticationModule),
-        canActivate: [UnAuthGuard]
+        // canActivate: [UnAuthGuard]
       },
       {
         path: '',
@@ -29,7 +29,7 @@ const routes: Routes = [
             loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
           }
         ],
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       }
     ]
   }

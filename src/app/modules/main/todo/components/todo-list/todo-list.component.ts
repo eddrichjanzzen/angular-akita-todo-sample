@@ -26,9 +26,8 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchTodos();
-    this.isLoading$ = this.todoQuery.selectLoading();
     this.todos$ = this.todoQuery.selectAll();
-
+    this.isLoading$ = this.todoQuery.selectLoading();
   }
 
   onScroll() {
@@ -37,8 +36,13 @@ export class TodoListComponent implements OnInit {
 
   private fetchTodos() {
     if (this.todoQuery.getHasMore()) {
+      
+      const pageNumber = this.todoQuery.getPageNumber()
+
+      alert("fetch " + pageNumber);
+
       this.todoService.searchTodos({
-        page: this.todoQuery.getPageNumber()
+        page: pageNumber
       });
     }
   }
