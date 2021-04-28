@@ -29,11 +29,13 @@ export class TodoService {
 
   @transaction()
   private updateTodoStore(response: SearchTodosResponseModel) {
-    if(response.next !== null){
-      this.todoStore.add(response.results);
+    this.todoStore.add(response.results);
+    
+    if(response.next){
       const nextPage = parseInt(response.next.split('page=')[1])
       this.todoStore.updatePage({ hasMore: !!response.next, pageNumber: nextPage });
     } 
+    
     this.todoStore.setLoading(false);
   }
 
