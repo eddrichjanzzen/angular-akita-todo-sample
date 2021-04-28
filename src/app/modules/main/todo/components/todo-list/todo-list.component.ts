@@ -38,9 +38,6 @@ export class TodoListComponent implements OnInit {
     if (this.todoQuery.getHasMore()) {
       
       const pageNumber = this.todoQuery.getPageNumber()
-
-      alert("fetch " + pageNumber);
-
       this.todoService.searchTodos({
         page: pageNumber
       });

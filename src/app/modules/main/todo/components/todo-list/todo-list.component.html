@@ -1,15 +1,17 @@
 <div class="todo-list">
-  <div infiniteScroll
-    class="scrollable"
-    [infiniteScrollDistance]="0.1"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="onScroll()">
-      <ng-container *ngIf="(todos$ | async) as todos">
-          <app-todo-item *ngFor="let todo of (todos$ | async)" [todoItem]="todo"></app-todo-item>
-      </ng-container>
-   </div>
-   <ng-container *ngIf="(isLoading$ | async)">
-      Fetching todo items...
-  </ng-container>
+  <ng-container *ngIf="(todos$ | async) as todos">
+    <div 
+      class="scrollable"
+      infiniteScroll
+      [infiniteScrollDistance]="0.1"
+      [infiniteScrollThrottle]="500"
+      [scrollWindow]="false"
+      (scrolled)="onScroll()">
+      <app-todo-item *ngFor="let todo of (todos$ | async)" [todoItem]="todo"></app-todo-item>
+    </div>
+    </ng-container>
+    <ng-container *ngIf="(isLoading$ | async)">
+        Fetching todo items...
+    </ng-container>
 </div>
 

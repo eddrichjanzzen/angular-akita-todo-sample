@@ -1,11 +1,12 @@
 <div class="main-nav">
-  <mat-toolbar color="primary">
+  <mat-toolbar class="toolbar" color="primary">
     <span>My Todos</span>
     <span class="spacer"></span>
     <button mat-raised-button (click)="logout()">Logout</button>
   </mat-toolbar>
+  <div class="main-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<div class="main-container">
-  <router-outlet></router-outlet>
-</div>
+
 
