@@ -1,5 +1,5 @@
 <div class="todo-list">
-  <ng-container *ngIf="(todos$ | async) as todos">
+  <ng-container *ngIf="todos">
     <div 
       class="scrollable"
       infiniteScroll
@@ -7,10 +7,10 @@
       [infiniteScrollThrottle]="500"
       [scrollWindow]="false"
       (scrolled)="onScroll()">
-      <app-todo-item *ngFor="let todo of (todos$ | async)" [todoItem]="todo"></app-todo-item>
+      <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"></app-todo-item>
     </div>
     </ng-container>
-    <ng-container *ngIf="(isLoading$ | async)">
+    <ng-container *ngIf="isLoading">
         Fetching todo items...
     </ng-container>
 </div>

@@ -4,7 +4,11 @@
     <app-add-todo></app-add-todo> 
   </div>
   <div class="todo-list-panel">
-    <app-todo-list></app-todo-list> 
+    <app-todo-list 
+      [isLoading]="isLoading"
+      [todos]="todos"
+      (scrolled)="onScrolled($event)"
+    ></app-todo-list> 
   </div>
 </div>
 
