@@ -6,3 +6,11 @@
 .mat-display-2 {
   margin: 0.5em 0;
 }
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+  margin-top: 50px;
+}

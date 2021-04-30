@@ -1,13 +1,26 @@
 <div class="todo-inbox">
+  <div class="flex-container">
+    <h1 class="mat-display-2">Inbox</h1>  
+    <div class="search">
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          [formControl]="searchControl"
+          placeholder="Search"
+        >
+      </mat-form-field>	
+    </div>
+  </div>
+
   <div class="add-todo-panel">
-    <h1 class="mat-display-2">Inbox</h1>
     <app-add-todo></app-add-todo> 
   </div>
   <div class="todo-list-panel">
     <app-todo-list 
       [isLoading]="isLoading"
       [todos]="todos"
-      (scrolled)="onScrolled($event)"
+      (scrolled)="onScrolled()"
     ></app-todo-list> 
   </div>
 </div>
