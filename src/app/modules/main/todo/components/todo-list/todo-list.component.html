@@ -7,7 +7,7 @@
       [infiniteScrollThrottle]="500"
       [scrollWindow]="false"
       (scrolled)="onScroll()">
-      <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"></app-todo-item>
+      <app-todo-item *ngFor="let todo of todos.data" [todoItem]="todo"></app-todo-item>
     </div>
     </ng-container>
     <ng-container *ngIf="isLoading">

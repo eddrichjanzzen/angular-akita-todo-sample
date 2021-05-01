@@ -1,5 +1,5 @@
-export interface PaginationRequestModel {
-  page: number
+export interface PaginatedRequestModel {
+  page: number;
 }
 
 

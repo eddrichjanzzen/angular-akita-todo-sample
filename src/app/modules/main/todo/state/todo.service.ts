@@ -19,6 +19,27 @@ export class TodoService {
               private toastrService: ToastrService) {
   }
 
+
+  fetchTodos(request: SearchTodosRequestModel) : Observable<PaginationResponse<TodoModel>> {
+    console.log(request);
+    return this.todoDataService.search(request).pipe(
+      map((response:SearchTodosResponseModel) => {
+          if(response.results !== null) {
+              return PaginationHelper.transfomToAkitaPaginationMapper(response, request, "id");
+          } else {
+              return {} as PaginationResponse<TodoModel>;
+          }
+      }),
+      catchError((err, caught) => {
+          this.toastrService.open("We couldn't fetch your data, please try again later", "x");
+          return caught;
+      }),
+      take(1)
+    );
+}
+
+
+
   searchTodos(request:SearchTodosRequestModel) {
     this.todoStore.setLoading(true);
     this.todoDataService.search(request)
@@ -60,7 +81,6 @@ export class TodoService {
     .subscribe((response: UpdateTodoResponseModel)=> {
       // update with the updated data 
       if(response.success){
-        console.log(response);
         this.todoStore.update(todoId, response.data);
       }
 

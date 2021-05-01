@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { PaginationResponse } from '@datorama/akita';
 import { TodoModel } from 'src/app/core/models/todo.model';
 
 
@@ -10,7 +11,7 @@ import { TodoModel } from 'src/app/core/models/todo.model';
 export class TodoListComponent implements OnInit {
 
   @Input() isLoading: boolean;
-  @Input() todos: Array<TodoModel>;
+  @Input() todos: PaginationResponse<TodoModel>;
   @Output() scrolled = new EventEmitter<void>();
 
   constructor() { }

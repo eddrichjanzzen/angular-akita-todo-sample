@@ -1,4 +1,4 @@
-import { PaginatedResponseModel, ResponseModel } from './generic.model';
+import { PaginatedRequestModel, PaginatedResponseModel, ResponseModel } from './generic.model';
 
 export interface TodoModel {
   id: string;
@@ -9,10 +9,9 @@ export interface TodoModel {
   completed: boolean;
 }
 
-export interface SearchTodosRequestModel {
+export interface SearchTodosRequestModel extends PaginatedRequestModel{
   // all optional
-  page: number;
-  title?: string;
+  title: string;
   completed?: boolean; 
 }
 

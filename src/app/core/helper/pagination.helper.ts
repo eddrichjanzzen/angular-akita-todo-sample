@@ -1,10 +1,10 @@
 import { PaginationResponse } from "@datorama/akita";
-import { PaginationRequestModel, PaginatedResponseModel } from "../models/generic.model";
+import { PaginatedRequestModel, PaginatedResponseModel } from "../models/generic.model";
 
 
 export default class PaginationHelper {
     
-    static transfomToAkitaPaginationMapper<T>(response: PaginatedResponseModel<T>, request: PaginationRequestModel, idProp:string ="") : PaginationResponse<T> {
+    static transfomToAkitaPaginationMapper<T>(response: PaginatedResponseModel<T>, request: PaginatedRequestModel, idProp:string ="") : PaginationResponse<T> {
         
         let pagination: PaginationResponse<T> = {} as PaginationResponse<T>;
         
@@ -23,6 +23,8 @@ export default class PaginationHelper {
 
         pagination.currentPage = request.page;
         pagination.data = data;
+        pagination.perPage = 7;
+        pagination.lastPage = Math.ceil(response.count / 7);
         pagination.total = response.count;
         
         return pagination;
