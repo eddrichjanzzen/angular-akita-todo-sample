@@ -21,7 +21,6 @@ export class TodoService {
 
 
   fetchTodos(request: SearchTodosRequestModel) : Observable<PaginationResponse<TodoModel>> {
-    console.log(request);
     return this.todoDataService.search(request).pipe(
       map((response:SearchTodosResponseModel) => {
           if(response.results !== null) {
@@ -37,28 +36,6 @@ export class TodoService {
       take(1)
     );
 }
-
-
-
-  searchTodos(request:SearchTodosRequestModel) {
-    this.todoStore.setLoading(true);
-    this.todoDataService.search(request)
-    .subscribe((response: SearchTodosResponseModel) => {
-      this.updateTodoStore(response);
-    });
-  }
-
-  @transaction()
-  private updateTodoStore(response: SearchTodosResponseModel) {
-    this.todoStore.add(response.results);
-    
-    if(response.next){
-      const nextPage = parseInt(response.next.split('page=')[1])
-      this.todoStore.updatePage({ hasMore: !!response.next, pageNumber: nextPage });
-    } 
-    
-    this.todoStore.setLoading(false);
-  }
 
   addTodo(todoItem: TodoModel): void {
     this.todoDataService.create(todoItem)

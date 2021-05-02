@@ -23,8 +23,8 @@ export default class PaginationHelper {
 
         pagination.currentPage = request.page;
         pagination.data = data;
-        pagination.perPage = 7;
-        pagination.lastPage = Math.ceil(response.count / 7);
+        pagination.perPage = request.pagesize || 7;
+        pagination.lastPage = Math.ceil(response.count / (request.pagesize || 7));
         pagination.total = response.count;
         
         return pagination;

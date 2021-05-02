@@ -1,5 +1,6 @@
 export interface PaginatedRequestModel {
   page: number;
+  pagesize?: number;
 }
 
 

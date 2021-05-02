@@ -6,9 +6,10 @@ import { TodoService } from '../../state/todo.service';
 import { debounceTime, startWith, switchMap, tap } from 'rxjs/operators';
 import { TODO_PAGINATOR } from '../../state/todo.paginator';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
-import { TodoState } from '../../state/todo.store';
-import { combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-todo-inbox',
   templateUrl: './todo-inbox.component.html',
@@ -19,6 +20,10 @@ export class TodoInboxComponent implements OnInit {
   isLoading: boolean = false;
   todos: PaginationResponse<TodoModel>;
   searchControl = new FormControl('');
+  onInboxScrolled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  
+  currentPageSize: number = 0;
+  PAGE_SIZE = 7;
 
   constructor(@Inject(TODO_PAGINATOR) 
     public paginatorRef: PaginatorPlugin<TodoModel>,
@@ -31,52 +36,62 @@ export class TodoInboxComponent implements OnInit {
       this.isLoading = loading;
     })
 
-    const filter$ = this.searchControl.valueChanges.pipe(
-      startWith(''),
-      tap(() => {
-        this.paginatorRef.refreshCurrentPage();
-      })
-    )
-
     const paginator$ = this.paginatorRef.pageChanges.pipe(
-      debounceTime(1000),
+      untilDestroyed(this),
       tap(() => { 
         this.paginatorRef.clearCache({clearStore: true})
       })
     );
 
+    const filter$ = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      untilDestroyed(this),
+      tap(() => {
+        this.paginatorRef.clearCache({clearStore: true})
+      })
+    )
+
+    const inboxScrolled$ = this.onInboxScrolled$.pipe(
+      untilDestroyed(this),
+      tap(() => {
+        this.currentPageSize += this.PAGE_SIZE;
+        this.paginatorRef.clearCache({clearStore: true})
+        this.paginatorRef.refreshCurrentPage();
+      })
+    )
+
     combineLatest([
       paginator$,
-      filter$
+      filter$,
+      inboxScrolled$
     ]).pipe(
-      switchMap(([page, title]: [number, string]) => {
+      untilDestroyed(this),
+      switchMap(([page, title, scrolled]: [number, string, boolean]) => {
         
         const reqFn = () => this.todoService.fetchTodos({
           page: page,
-          title: title
+          pagesize: this.currentPageSize,
+          title: title,
         });
 
       return <Observable<PaginationResponse<TodoModel>>> this.paginatorRef.getPage(reqFn);
+    
     })).subscribe((response)=> {
-
       this.todos = response;
     });
-
-
   }
 
-  private fetchTodos(title: string) : void {
-    if (this.todoQuery.getHasMore()) {
-      const pageNumber = this.todoQuery.getPageNumber()
-      this.todoService.searchTodos({
-        page: pageNumber,
-        title: title
-      });
+
+  onScrolled() : void { 
+    if(!this.paginatorRef.isLast){
+      
+      //set on list scrolled value to true
+      this.onInboxScrolled$.next(true);
     }
   }
 
-  onScrolled() : void { 
-    // this.fetchTodos();
+  ngOnDestroy(){
   }
 
 }
