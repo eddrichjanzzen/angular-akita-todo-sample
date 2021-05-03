@@ -85,7 +85,6 @@ export class TodoInboxComponent implements OnInit {
 
   onScrolled() : void { 
     if(!this.paginatorRef.isLast){
-      
       //set on list scrolled value to true
       this.onInboxScrolled$.next(true);
     }
