@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AddTodoResponseModel } from 'src/app/core/models/todo.model';
 import { TodoService } from '../../state/todo.service';
 
 @Component({
@@ -11,8 +10,10 @@ import { TodoService } from '../../state/todo.service';
 export class AddTodoComponent implements OnInit {
 
   addTodoForm: FormGroup;
+  @Output() todoAdded = new EventEmitter<void>();
 
-  constructor(private todoService: TodoService) { 
+  constructor(
+    private todoService: TodoService) { 
     this.addTodoForm = new FormGroup({
       title: new FormControl(''),
       description: new FormControl(''),
@@ -28,6 +29,8 @@ export class AddTodoComponent implements OnInit {
       this.addTodoForm.patchValue({
         title: ""
       });
+
+      this.todoAdded.next();
     }
   }
 

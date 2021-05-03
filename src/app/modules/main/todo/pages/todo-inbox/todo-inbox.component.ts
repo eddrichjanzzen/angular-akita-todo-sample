@@ -90,6 +90,11 @@ export class TodoInboxComponent implements OnInit {
     }
   }
 
+  onTodoAdded() : void {
+    this.paginatorRef.clearCache({clearStore: true})
+    this.paginatorRef.refreshCurrentPage();
+  }
+
   ngOnDestroy(){
   }
 

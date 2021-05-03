@@ -14,7 +14,9 @@
   </div>
 
   <div class="add-todo-panel">
-    <app-add-todo></app-add-todo> 
+    <app-add-todo
+      (todoAdded)="onTodoAdded()"  
+    ></app-add-todo> 
   </div>
   <div class="todo-list-panel">
     <app-todo-list 
