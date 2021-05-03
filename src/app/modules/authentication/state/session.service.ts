@@ -18,26 +18,31 @@ export class SessionService {
               ) {
   }
 
-  registerUser(request: RegisterUserRequestModel): void {
+ 
+  registerUser(request: RegisterUserRequestModel) : void {
     this.persistStorage.clearStore();
     this.sessionStore.setLoading(true);
 
     this.userDataService.registerUser(request)
     .subscribe((userData: RegisterUserResponseModel) => {
-      if (userData?.tokens){
+      if (userData?.tokens !== null){
+
         // update the session store here
         this.sessionStore.register(userData);
         this.sessionStore.setLoading(false);
+        this.router.navigateByUrl('/todos');
       }
 
-    }, (err) => {
+    }, (err: any) => {
       // set the error state
       this.sessionStore.setError(err);
       this.sessionStore.setLoading(false);
+      this.toastrService.open(err.error.detail, 'x');
 
     });
 
   }
+
 
 
   loginUser(request: LoginUserRequestModel): void {
@@ -59,7 +64,6 @@ export class SessionService {
       this.sessionStore.setError(err);
       this.sessionStore.setLoading(false);
       this.toastrService.open(err.error.detail, 'x');
-
 
     });
 

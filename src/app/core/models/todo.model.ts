@@ -4,6 +4,7 @@ export interface TodoModel {
   id: string;
   title: string;
   description: string;
+  deadline: Date;
   created_date?: Date;
   updated_date?: Date;
   completed: boolean;
