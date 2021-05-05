@@ -29,9 +29,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp(): void {
-    alert('outside clicked');
     if (this.signUpForm.valid){
-      alert('clicked');
       this.sessionService.registerUser(this.signUpForm.value);
     }
   }
