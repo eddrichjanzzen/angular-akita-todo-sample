@@ -14,12 +14,11 @@
   </div>
 
   <div class="add-todo-panel">
-    <app-add-todo
-      (todoAdded)="onTodoAdded()"  
-    ></app-add-todo> 
+    <app-add-todo></app-add-todo> 
   </div>
   <div class="todo-list-panel">
     <app-todo-list 
+      [isPageLoading]="isPageLoading"
       [isLoading]="isLoading"
       [todos]="todos"
       (scrolled)="onScrolled()"
