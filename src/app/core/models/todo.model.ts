@@ -25,3 +25,7 @@ export interface UpdateTodoResponseModel extends ResponseModel<TodoModel> { }
 export interface AddTodoRequestModel extends TodoModel { }
 
 export interface AddTodoResponseModel extends ResponseModel<TodoModel> { }
+
+export interface DeleteTodoResponseModel {
+  success: boolean;
+}
