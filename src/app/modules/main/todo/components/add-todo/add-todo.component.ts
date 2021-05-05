@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PaginatorPlugin } from '@datorama/akita';
+import { TodoModel } from 'src/app/core/models/todo.model';
+import { TODO_PAGINATOR } from '../../state/todo.paginator';
 import { TodoService } from '../../state/todo.service';
 
 @Component({
@@ -10,10 +13,10 @@ import { TodoService } from '../../state/todo.service';
 export class AddTodoComponent implements OnInit {
 
   addTodoForm: FormGroup;
-  @Output() todoAdded = new EventEmitter<void>();
 
   constructor(
-    private todoService: TodoService) { 
+    private todoService: TodoService,
+  ) { 
     this.addTodoForm = new FormGroup({
       title: new FormControl(''),
       description: new FormControl(''),
@@ -30,7 +33,6 @@ export class AddTodoComponent implements OnInit {
         title: ""
       });
 
-      this.todoAdded.next();
     }
   }
 
