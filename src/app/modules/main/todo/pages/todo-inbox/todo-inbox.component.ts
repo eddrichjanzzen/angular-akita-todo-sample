@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { TodoModel } from 'src/app/core/models/todo.model';
 import { TodoQuery } from '../../state/todo.query';
 import { TodoService } from '../../state/todo.service';
-import { debounceTime, startWith, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, filter, startWith, switchMap, tap } from 'rxjs/operators';
 import { TODO_PAGINATOR } from '../../state/todo.paginator';
 import { PaginationResponse, PaginatorPlugin } from '@datorama/akita';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -17,7 +17,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class TodoInboxComponent implements OnInit {
 
-  isLoading: boolean = false;
+  isPageLoading: boolean = false;
+  isLoading : boolean = false;
+
   todos: PaginationResponse<TodoModel>;
   searchControl = new FormControl('');
   onInboxScrolled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -31,9 +33,17 @@ export class TodoInboxComponent implements OnInit {
     private todoQuery: TodoQuery) { }
 
   ngOnInit(): void {
-    
-    this.paginatorRef.isLoading$.subscribe((loading)=>{
-      this.isLoading = loading;
+  
+    // todo action loading eg. adding, and deleting a todo
+    this.todoQuery.selectLoading().subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
+
+    // pagination loading, scrolling for next page
+    this.paginatorRef.isLoading$.pipe(
+      untilDestroyed(this),
+    ).subscribe((pageLoading)=> {
+      this.isPageLoading = pageLoading;
     })
 
     const paginator$ = this.paginatorRef.pageChanges.pipe(
@@ -82,17 +92,11 @@ export class TodoInboxComponent implements OnInit {
     });
   }
 
-
   onScrolled() : void { 
     if(!this.paginatorRef.isLast){
       //set on list scrolled value to true
       this.onInboxScrolled$.next(true);
     }
-  }
-
-  onTodoAdded() : void {
-    this.paginatorRef.clearCache({clearStore: true})
-    this.paginatorRef.refreshCurrentPage();
   }
 
   ngOnDestroy(){

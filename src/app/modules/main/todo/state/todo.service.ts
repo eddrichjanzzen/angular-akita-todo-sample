@@ -1,6 +1,6 @@
-import { AddTodoResponseModel, SearchTodosRequestModel, SearchTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
-import { Injectable } from '@angular/core';
-import { ID, PaginationResponse, transaction } from '@datorama/akita';
+import { AddTodoResponseModel, DeleteTodoResponseModel, SearchTodosRequestModel, SearchTodosResponseModel, TodoModel, UpdateTodoResponseModel } from 'src/app/core/models/todo.model';
+import { Inject, Injectable } from '@angular/core';
+import { ID, PaginationResponse, PaginatorPlugin, transaction } from '@datorama/akita';
 import { HttpClient } from '@angular/common/http';
 import { TodoStore } from './todo.store';
 import { TodoDataService } from 'src/app/core/services/todo-data-service';
@@ -9,12 +9,15 @@ import { Observable } from 'rxjs';
 import PaginationHelper from 'src/app/core/helper/pagination.helper';
 import { catchError, debounceTime, map, take } from 'rxjs/operators';
 import { PaginatedResponseModel } from 'src/app/core/models/generic.model';
+import { TODO_PAGINATOR } from './todo.paginator';
 
 
 @Injectable({ providedIn: 'root' })
 export class TodoService {
 
-  constructor(private todoStore: TodoStore,
+  constructor(@Inject(TODO_PAGINATOR) 
+              public paginatorRef: PaginatorPlugin<TodoModel>,
+              private todoStore: TodoStore,
               private todoDataService: TodoDataService,
               private toastrService: ToastrService) {
   }
@@ -38,11 +41,14 @@ export class TodoService {
 }
 
   addTodo(todoItem: TodoModel): void {
+    this.todoStore.setLoading(true);
     this.todoDataService.create(todoItem)
     .subscribe((response: AddTodoResponseModel)=> {
       // update with the updated data 
       if(response.success){
         this.todoStore.add(response.data, { prepend: true });
+        this.paginatorRef.clearCache({clearStore: true})
+        this.paginatorRef.refreshCurrentPage();
         this.toastrService.open("Successfully added item", "x");
       }
 
@@ -65,6 +71,24 @@ export class TodoService {
       // set the error state
       this.todoStore.setError(err);
       this.todoStore.setLoading(false);
+    })
+  }
+
+  deleteTodo(todoId: string): void {
+    this.todoDataService.delete(todoId)
+    .subscribe((response: DeleteTodoResponseModel)=> {
+      // update with the updated data 
+      if(response.success){
+        this.todoStore.remove(todoId);
+        this.paginatorRef.clearCache({clearStore: true})
+        this.paginatorRef.refreshCurrentPage();
+      }
+
+    }, (err)=>{
+      // set the error state
+      this.todoStore.setError(err);
+      this.todoStore.setLoading(false);
+      this.toastrService.open("An error occured in deleting this item", "x");
     })
   }
 
