@@ -4,15 +4,16 @@ import { TodoModel } from 'src/app/core/models/todo.model';
 
 
 export interface TodoState extends EntityState<TodoModel> {
-  hasMore: boolean;
-  pageNumber: number; 
+  ui: {
+    isLoading: boolean;  
+  };
 }
 
-const initialState: TodoState = {
-  hasMore: true,
-  pageNumber: 1
-}
-
+const initialState = {
+  ui: { 
+    isLoading: false
+  }
+};
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'todo' })
@@ -22,8 +23,8 @@ export class TodoStore extends EntityStore<TodoState, TodoModel> {
     super(initialState);
   }
 
-  updatePage(page: TodoState) {
-    this.update(page);
+  todoULoading(isLoading: boolean){
+    this.update({ui: {isLoading}})
   }
 
 }
