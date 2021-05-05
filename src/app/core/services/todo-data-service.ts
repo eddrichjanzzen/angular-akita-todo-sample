@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ApiHttpService } from './api-http.service';
 import { AddTodoRequestModel, AddTodoResponseModel, 
+  DeleteTodoResponseModel, 
          SearchTodosRequestModel, SearchTodosResponseModel, 
          UpdateTodoRequestModel, UpdateTodoResponseModel } 
 from '../models/todo.model';
@@ -27,6 +28,10 @@ export class TodoDataService {
 
   create(request: AddTodoRequestModel): Observable<AddTodoResponseModel>{
     return this.http.post('/task', request);
+  }
+
+  delete(todoId: string): Observable<DeleteTodoResponseModel>{
+    return this.http.delete(`/task/${todoId}`);
   }
 
 }
