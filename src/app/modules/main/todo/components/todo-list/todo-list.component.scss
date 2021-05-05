@@ -1,5 +1,8 @@
 .scrollable {
-  // overflow: scroll;
   overflow-y: scroll;
   height: 60vh;
+}
+
+.spinner {
+  position: relative;
 }

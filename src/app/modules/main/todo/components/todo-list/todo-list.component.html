@@ -7,11 +7,24 @@
       [infiniteScrollThrottle]="500"
       [scrollWindow]="false"
       (scrolled)="onScroll()">
-      <app-todo-item *ngFor="let todo of todos.data" [todoItem]="todo"></app-todo-item>
+      
+      <ng-container *ngIf="!isLoading; else loading">
+        <app-todo-item 
+        *ngFor="let todo of todos.data" 
+        [todoItem]="todo">
+      </app-todo-item>
+      </ng-container>
+      <ng-template #loading>
+        <mat-spinner 
+          diameter="70"
+          class="spinner">
+        </mat-spinner>
+      </ng-template>
+
     </div>
-    </ng-container>
-    <ng-container *ngIf="isLoading">
-        Fetching todo items...
-    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="isPageLoading">
+      Fetching todo items...
+  </ng-container>
 </div>
 
