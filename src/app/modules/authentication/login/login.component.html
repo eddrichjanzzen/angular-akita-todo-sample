@@ -1,52 +1,60 @@
-<div class="content">
-
-  <mat-card>
-    <ng-container *ngIf="(isLoading$ | async)">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </ng-container>
-    <mat-card-content>
-      <mat-card-header>
-        <mat-card-title class="header">
-          <div class="mat-display-2">LOGIN</div>
-        </mat-card-title>
-      </mat-card-header>
-      <form name="loginForm" [formGroup]="loginForm">
-
-        <div class="email-input">
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              formControlName="email"
-              type="email"
-              matInput
-              placeholder="Enter your email address"
-              >
-          </mat-form-field>
-        </div>
-
-        <div class="password-input">
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input
-              formControlName="password"
-              type="password"
-              matInput
-              placeholder="Enter your password"
-              [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide =! hide" [attr.aria-label]="'Hide Password'" [attr.aria.pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility_on'}}</mat-icon>
-            </button>
-          </mat-form-field>
-
-          <div>
-            <p class="mat-body-2">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
-          </div>
-
-        </div>
-
-        <button mat-raised-button color="primary" (click)="onLogin()">Login</button>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
+<div class="login">
+  <div class="flex-container">
+    <div class="one">
+      <img class="todo-asset" src="assets/images/asset1.png">
+    </div>
+    <div class="two">
+      <mat-card>
+        <ng-container *ngIf="(isLoading$ | async)">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+        <mat-card-content>
+          <mat-card-header>
+            <mat-card-title class="header">
+              <div class="mat-display-2">Welcome</div>
+            </mat-card-title>
+          </mat-card-header>
+          <form name="loginForm" [formGroup]="loginForm">
+    
+            <div class="email-input">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                  formControlName="email"
+                  type="email"
+                  matInput
+                  placeholder="Enter your email address"
+                  >
+              </mat-form-field>
+            </div>
+    
+            <div class="password-input">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input
+                  formControlName="password"
+                  type="password"
+                  matInput
+                  placeholder="Enter your password"
+                  [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide =! hide" [attr.aria-label]="'Hide Password'" [attr.aria.pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility_on'}}</mat-icon>
+                </button>
+              </mat-form-field>
+    
+              <div>
+                <p class="mat-body-2">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+              </div>
+    
+            </div>
+    
+            <button mat-raised-button color="primary" (click)="onLogin()">Login</button>
+          </form>
+    
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
+
+
