@@ -3,7 +3,8 @@ import {
   LoginUserResponseModel,
   UserModel,
   UpdateUserRequestModel,
-  UpdateUserResponseModel
+  UpdateUserResponseModel,
+  DeleteUserResponseModel
 } from './../models/user.model';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -31,6 +32,10 @@ export class UserDataService {
 
   updateUser(request: UpdateUserRequestModel): Observable<UpdateUserResponseModel>{
     return this.http.put('user/me', request);
+  }
+
+  deleteUser(userId: string): Observable<DeleteUserResponseModel>{
+    return this.http.delete('user/me');
   }
 
 }

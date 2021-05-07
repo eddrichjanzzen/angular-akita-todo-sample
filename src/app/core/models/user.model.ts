@@ -41,3 +41,7 @@ export interface UpdateUserResponseModel{
   data: UserModel;
   success: boolean;
 }
+
+export interface DeleteUserResponseModel {
+  success: boolean;
+}
