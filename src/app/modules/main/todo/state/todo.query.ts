@@ -11,14 +11,4 @@ export class TodoQuery extends QueryEntity<TodoState, TodoModel> {
   constructor(protected store: TodoStore) {
     super(store);
   }
-
-  getHasMore() {
-    return this.getValue().hasMore;
-  }
-
-  getPageNumber() {
-    return this.getValue().pageNumber;
-  }
-
-
 }
