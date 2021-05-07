@@ -27,15 +27,15 @@ export class UserDataService {
   }
 
   getUser(): Observable<UserModel>{
-    return this.http.get('user/me');
+    return this.http.get('/user/me');
   }
 
   updateUser(request: UpdateUserRequestModel): Observable<UpdateUserResponseModel>{
-    return this.http.put('user/me', request);
+    return this.http.put('/user/me', request);
   }
 
   deleteUser(userId: string): Observable<DeleteUserResponseModel>{
-    return this.http.delete('user/me');
+    return this.http.delete('/user/me');
   }
 
 }
