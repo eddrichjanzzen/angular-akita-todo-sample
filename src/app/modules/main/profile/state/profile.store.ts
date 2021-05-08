@@ -3,7 +3,7 @@ import { ActiveState, EntityState, EntityStore, StoreConfig } from '@datorama/ak
 import { UserModel } from 'src/app/core/models/user.model';
 
 // remember to inclue active state
-export interface ProfileState extends EntityState<UserModel>, ActiveState {}
+export interface ProfileState extends EntityState<UserModel, string>, ActiveState {}
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'profile' })

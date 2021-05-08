@@ -14,12 +14,15 @@ export class ProfileService {
               private userDataService: UserDataService) {
   }
 
-  getProfile() : void {
+  fetchProfile() : void {
     this.profileStore.setLoading(true);
 
     this.userDataService.getUser()
       .subscribe((data: UserModel)=> {
+
+        this.profileStore.add(data);
         this.profileStore.setActive(data.id);
+
     });
 
     this.profileStore.setLoading(false);
