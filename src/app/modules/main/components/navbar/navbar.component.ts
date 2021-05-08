@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
   displayName?: string;
+  avatar?: string;
 
   constructor(private sessionQuery: SessionQuery,
               private sessionService: SessionService,
@@ -29,7 +30,8 @@ export class NavbarComponent implements OnInit {
 
     this.profileQuery.selectActive()
       .subscribe((profile) => {
-        this.displayName = profile?.display_name
+        this.displayName = profile?.display_name;
+        this.avatar = profile?.avatar;
       });
   }
 

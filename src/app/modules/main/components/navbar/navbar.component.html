@@ -3,9 +3,16 @@
     <span>My Todos</span>
     <span class="spacer"></span>
     <div class="displayName">{{displayName}}</div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
+   
+    <div class="avatarContainer">
+        <img class="avatar" src="{{avatar ? avatar : 'assets/images/profile.jpg'}}"/>
+    </div>
+
+
+    <div [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    
+    <mat-icon class="dropDownArrow">arrow_drop_down</mat-icon>
+    </div>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>
         View Profile

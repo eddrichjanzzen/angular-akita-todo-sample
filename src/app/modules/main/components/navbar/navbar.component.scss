@@ -13,3 +13,19 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.dropDownArrow {
+  font-size: 1.5em;
+}
+
+.avatarContainer {
+  padding: 1em;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  object-fit: contain;
+}
