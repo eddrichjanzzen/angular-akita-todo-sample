@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/core/models/user.model';
+import { ProfileQuery } from '../../state/profile.query';
 
 @Component({
   selector: 'app-profile-card',
@@ -10,9 +11,9 @@ import { UserModel } from 'src/app/core/models/user.model';
 export class ProfileCardComponent implements OnInit {
 
   profileForm: FormGroup;
-  @Input() profileInfo: UserModel;
+  @Input() profileInfo?: UserModel;
 
-  constructor() { 
+  constructor(private profileQuery: ProfileQuery) { 
     this.profileForm = new FormGroup({
       email: new FormControl('', Validators.minLength(6)),
       display_name: new FormControl('', Validators.minLength(6)),
@@ -21,6 +22,13 @@ export class ProfileCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+      this.profileForm.setValue({
+        email: this.profileInfo?.email,
+        display_name: this.profileInfo?.display_name,
+        date_created: this.profileInfo?.created_date
+      })
+
   }
 
 }
