@@ -1,0 +1,42 @@
+<div class="profile-card">
+  <mat-card>
+    <mat-card-content>
+      <div class="flex-container">
+        <div class="profile-avatar">
+          <img class="avatar" src="{{'assets/images/profile.jpg'}}"/>
+        </div>
+        <div class="profile-info">
+          <mat-card-header>
+            <mat-card-title class="header">
+              <div class="mat-display-2">My Profile</div>
+            </mat-card-title>
+          </mat-card-header>
+          <form name="profileForm" [formGroup]="profileForm">
+            
+            <div class="displayName">
+              <mat-form-field class="full-width" appearance="outline">
+                <input
+                  formControlName="display_name"
+                  type="email"
+                  matInput
+                  >
+              </mat-form-field>
+            </div>
+    
+            <div class="email">
+              <mat-form-field class="full-width" appearance="outline">
+                <input
+                  formControlName="email"
+                  type="email"
+                  matInput>
+              </mat-form-field>
+            </div>
+  
+            <button mat-raised-button color="primary">Update Profile</button>
+          </form>
+        </div>
+      </div>
+      
+    </mat-card-content>
+  </mat-card>
+</div>
