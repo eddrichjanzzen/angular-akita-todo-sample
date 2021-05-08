@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { UserModel } from 'src/app/core/models/user.model';
 import { SessionQuery } from 'src/app/modules/authentication/state/session.query';
 import { SessionService } from 'src/app/modules/authentication/state/session.service';
@@ -26,8 +27,10 @@ export class NavbarComponent implements OnInit {
   
     this.profileService.fetchProfile();
 
-
-
+    this.profileQuery.selectActive()
+      .subscribe((profile) => {
+        this.displayName = profile?.display_name
+      });
   }
 
   logout(): void {
