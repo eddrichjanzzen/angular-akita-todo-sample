@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserModel } from 'src/app/core/models/user.model';
+import { ProfileQuery } from '../../state/profile.query';
+import { ProfileService } from '../../state/profile.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileViewComponent implements OnInit {
 
-  constructor() { }
+  profileInfo?: UserModel;  
+
+  constructor(
+    private profileQuery: ProfileQuery,
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
+
   }
 
 }
