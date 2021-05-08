@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
 import { UnAuthGuard } from 'src/app/core/guards/un-auth.guard';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,11 @@ const routes: Routes = [
             path: 'todos',
             component: TodoComponent,
             loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent,
+            loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
           }
         ],
         canActivate: [AuthGuard]
