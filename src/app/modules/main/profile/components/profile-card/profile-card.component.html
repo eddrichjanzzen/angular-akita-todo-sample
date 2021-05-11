@@ -3,7 +3,7 @@
     <mat-card-content>
       <div class="flex-container">
         <div class="profile-avatar">
-          <img class="avatar" src="{{'assets/images/profile.jpg'}}"/>
+          <img class="avatar" src="{{profileInfo?.avatar ? profileInfo?.avatar : 'assets/images/profile.jpg'}}"/>
         </div>
         <div class="profile-info">
           <mat-card-header>
@@ -11,29 +11,37 @@
               <div class="mat-display-2">My Profile</div>
             </mat-card-title>
           </mat-card-header>
-          <form name="profileForm" [formGroup]="profileForm">
-            
-            <div class="displayName">
-              <mat-form-field class="full-width" appearance="outline">
-                <input
-                  formControlName="display_name"
-                  type="email"
-                  matInput
-                  >
-              </mat-form-field>
-            </div>
-    
-            <div class="email">
-              <mat-form-field class="full-width" appearance="outline">
-                <input
-                  formControlName="email"
-                  type="email"
-                  matInput>
-              </mat-form-field>
-            </div>
-  
-            <button mat-raised-button color="primary">Update Profile</button>
-          </form>
+
+          <ng-container *ngIf="!(isLoading$ | async); else loading">
+            <form name="profileForm" [formGroup]="profileForm">
+              <div class="displayName">
+                <mat-form-field class="full-width" appearance="outline">
+                  <input
+                    formControlName="display_name"
+                    type="email"
+                    matInput
+                    >
+                </mat-form-field>
+              </div>
+      
+              <div class="email">
+                <mat-form-field class="full-width" appearance="outline">
+                  <input
+                    formControlName="email"
+                    type="email"
+                    matInput>
+                </mat-form-field>
+              </div>
+              <button mat-raised-button color="primary" (click)="updateProfile()">Update Profile</button>
+            </form>
+          </ng-container>
+
+          <ng-template #loading>
+            <mat-spinner 
+              diameter="70"
+              class="spinner">
+            </mat-spinner>
+          </ng-template>
         </div>
       </div>
       
