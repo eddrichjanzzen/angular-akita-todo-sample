@@ -1,8 +1,16 @@
-.scrollable {
-  overflow-y: scroll;
-  height: 60vh;
+.todo-list {
+  height: 55vh;
 }
 
-.spinner {
-  position: relative;
+.scrollable {
+  overflow-y: scroll;
+  height: 100%;
 }
+
+.flex-container {
+  height: 100%;
+  display : flex;
+  align-items: center;
+  justify-content: center
+}
+

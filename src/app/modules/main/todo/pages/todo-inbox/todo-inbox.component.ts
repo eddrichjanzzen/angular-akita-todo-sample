@@ -17,8 +17,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class TodoInboxComponent implements OnInit {
 
-  isPageLoading: boolean = false;
-  isLoading : boolean = false;
+  isLoading: boolean = false;
 
   todos: PaginationResponse<TodoModel>;
   searchControl = new FormControl('');
@@ -38,13 +37,6 @@ export class TodoInboxComponent implements OnInit {
     this.todoQuery.selectLoading().subscribe((isLoading) => {
       this.isLoading = isLoading;
     });
-
-    // pagination loading, scrolling for next page
-    this.paginatorRef.isLoading$.pipe(
-      untilDestroyed(this),
-    ).subscribe((pageLoading)=> {
-      this.isPageLoading = pageLoading;
-    })
 
     const paginator$ = this.paginatorRef.pageChanges.pipe(
       untilDestroyed(this),

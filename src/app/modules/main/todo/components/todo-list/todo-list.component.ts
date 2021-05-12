@@ -10,7 +10,6 @@ import { TodoModel } from 'src/app/core/models/todo.model';
 })
 export class TodoListComponent implements OnInit {
 
-  @Input() isPageLoading: boolean;
   @Input() isLoading: boolean;
   @Input() todos: PaginationResponse<TodoModel>;
   

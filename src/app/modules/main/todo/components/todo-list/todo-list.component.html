@@ -1,5 +1,5 @@
 <div class="todo-list">
-  <ng-container *ngIf="todos">
+  <ng-container *ngIf="!isLoading; else loading">
     <div 
       class="scrollable"
       infiniteScroll
@@ -8,24 +8,20 @@
       [scrollWindow]="false"
       (scrolled)="onScroll()">
       
-      <ng-container *ngIf="!isLoading">
+      <ng-container *ngIf="todos">
         <app-todo-item 
         *ngFor="let todo of todos.data" 
         [todoItem]="todo">
         </app-todo-item>
-        <ng-container *ngIf="isPageLoading">
-          Fetching todo items...
-        </ng-container>
       </ng-container>
-
-      <ng-container *ngIf="isLoading">
-        <mat-spinner 
-          diameter="70"
-          class="spinner">
-        </mat-spinner>
-      </ng-container>
-
     </div>
   </ng-container>
+  <ng-template #loading>
+    <div class="flex-container">
+      <mat-spinner 
+      diameter="70">
+      </mat-spinner>
+    </div>
+  </ng-template>
 </div>
 
