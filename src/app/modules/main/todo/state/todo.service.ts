@@ -24,13 +24,17 @@ export class TodoService {
 
 
   fetchTodos(request: SearchTodosRequestModel) : Observable<PaginationResponse<TodoModel>> {
+    this.todoStore.setLoading(true);
+    
     return this.todoDataService.search(request).pipe(
       map((response:SearchTodosResponseModel) => {
           if(response.results !== null) {
+              this.todoStore.setLoading(false);
               return PaginationHelper.transfomToAkitaPaginationMapper(response, request, "id");
-          } else {
-              return {} as PaginationResponse<TodoModel>;
-          }
+          } 
+          this.todoStore.setLoading(false);
+          return {} as PaginationResponse<TodoModel>;
+          
       }),
       catchError((err, caught) => {
           this.toastrService.open("We couldn't fetch your data, please try again later", "x");
