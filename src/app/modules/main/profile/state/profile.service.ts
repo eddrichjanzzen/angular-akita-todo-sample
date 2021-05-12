@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
-import { HttpClient } from '@angular/common/http';
 import { ProfileStore } from './profile.store';
 import { UserDataService } from 'src/app/core/services/user-data.service';
-import { Observable } from 'rxjs';
 import { UpdateUserRequestModel, UpdateUserResponseModel, UserModel } from 'src/app/core/models/user.model';
 import { ToastrService } from 'src/app/core/services/toastr.service';
-
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -30,7 +26,6 @@ export class ProfileService {
       this.toastrService.open(err.error.detail, 'x');
 
     });
-    this.profileStore.setLoading(false);
   }
 
   updateProfile(request: UpdateUserRequestModel) : void {
@@ -43,6 +38,5 @@ export class ProfileService {
         this.profileStore.setLoading(false);
       });
 
-    this.profileStore.setLoading(false);
   }
 }
