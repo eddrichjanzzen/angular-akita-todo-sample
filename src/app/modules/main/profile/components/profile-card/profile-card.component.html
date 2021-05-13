@@ -14,7 +14,16 @@
 
           <ng-container *ngIf="!(isLoading$ | async); else loading">
             <form name="profileForm" [formGroup]="profileForm">
-              <div class="displayName">
+              
+              
+              <div class="avatar-upload">
+                <div class="full-width">
+                  <app-file-upload 
+                  formControlName="avatar">
+                  </app-file-upload>
+                </div>
+              </div>
+              <div class="display-name">
                 <mat-form-field class="full-width" appearance="outline">
                   <input
                     formControlName="display_name"

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { skip, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { UserModel } from 'src/app/core/models/user.model';
 import { ProfileQuery } from '../../state/profile.query';
 import { ProfileService } from '../../state/profile.service';
@@ -15,14 +15,17 @@ export class ProfileCardComponent implements OnInit {
 
   profileForm: FormGroup;
   isLoading$ : Observable<boolean>;
-  profileInfo?: UserModel;  
+  profileInfo?: UserModel;
+  fileToUpload: File;  
 
   constructor(
     private profileQuery: ProfileQuery,
     private profileService: ProfileService) { 
+    
     this.profileForm = new FormGroup({
       email: new FormControl({ value: '', disabled: true}),
-      display_name: new FormControl('', Validators.minLength(6))
+      display_name: new FormControl('', Validators.minLength(6)),
+      avatar: new FormControl('')
     });
   }
 
@@ -50,5 +53,4 @@ export class ProfileCardComponent implements OnInit {
       });
     }
   }
-
 }

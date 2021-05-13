@@ -19,10 +19,14 @@ mat-card {
   padding: 2em 0;
 }
 
+.profile-avatar {
+  object-fit: contain;
+}
+
 .profile-avatar img{
   border: 1px solid lightgrey;
   border-radius: 50%;
-  max-width: 400px;
+  max-width: 300px;
   min-width: 250px;
   width: 100%;
 }
