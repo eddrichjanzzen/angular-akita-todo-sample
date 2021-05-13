@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomMaterialModule } from '../custom-material/custom-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 const sharedModules = [
   CommonModule,
@@ -12,13 +13,21 @@ const sharedModules = [
   ReactiveFormsModule,
 ];
 
+const sharedComponents = [
+  FileUploadComponent
+]
+
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    ...sharedComponents
+  ],
   imports: [
     ...sharedModules
   ],
   exports: [
-    ...sharedModules
+    ...sharedModules,
+    ...sharedComponents
   ]
 })
 export class SharedModule { }
