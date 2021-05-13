@@ -1,5 +1,10 @@
 import { TokenModel } from './token.model';
 
+export interface UserAvatarModel {
+  name: string;
+  url: string;
+}
+
 export interface UserModel {
   id: string;
   display_name: string;
@@ -44,4 +49,9 @@ export interface UpdateUserResponseModel{
 
 export interface DeleteUserResponseModel {
   success: boolean;
+}
+
+export interface UploadUserAvatarResponse {
+  success: boolean;
+  data: UserAvatarModel;
 }

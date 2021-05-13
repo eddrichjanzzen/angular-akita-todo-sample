@@ -4,7 +4,8 @@ import {
   UserModel,
   UpdateUserRequestModel,
   UpdateUserResponseModel,
-  DeleteUserResponseModel
+  DeleteUserResponseModel,
+  UploadUserAvatarResponse
 } from './../models/user.model';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -36,6 +37,12 @@ export class UserDataService {
 
   deleteUser(userId: string): Observable<DeleteUserResponseModel>{
     return this.http.delete('/user/me');
+  }
+
+  uploadAvatar(file: File): Observable<UploadUserAvatarResponse>{
+    const formData: FormData = new FormData();
+    formData.append('avatar', file, file.name);
+    return this.http.post('/user/me/avatar', formData);
   }
 
 }
