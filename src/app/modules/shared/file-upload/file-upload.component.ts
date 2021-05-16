@@ -16,7 +16,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class FileUploadComponent implements ControlValueAccessor {
 
   @Input() progress: number;
-
   onChange: Function;
   public file: File | null = null;
 
@@ -41,10 +40,5 @@ export class FileUploadComponent implements ControlValueAccessor {
   registerOnTouched(fn: Function){
 
   }
-
-  uploadClicked(): void {
-    this.host.nativeElement.click();
-  }
-
 
 }

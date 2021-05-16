@@ -1,7 +1,15 @@
 <div class="file-upload">
-  <button (click)="uploadClicked()">Choose File</button>
-  <span>{{file ? file.name : ' or drag and drop file here'}}</span>
-  <input class="file-input" type="file" hidden>
+  <input id="upload" class="file-input" type="file" hidden #fileUpload>
+
+  <div class="flex-container">
+    <div class="file-name">
+      {{file?.name || "No file uploaded yet."}}
+    </div>
+    <div class="upload-button">
+      <button mat-raised-button color="primary" (click)="fileUpload.click()">Choose File</button>
+    </div>
+  </div>
+
 </div>
 
-<mat-progress-bar></mat-progress-bar>
+<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
