@@ -21,12 +21,6 @@ export class ProfileCardComponent implements OnInit {
   constructor(
     private profileQuery: ProfileQuery,
     private profileService: ProfileService) { 
-    
-    this.profileForm = new FormGroup({
-      email: new FormControl({ value: '', disabled: true}),
-      display_name: new FormControl('', Validators.minLength(6)),
-      avatar: new FormControl('')
-    });
   }
 
   ngOnInit(): void {
@@ -37,12 +31,13 @@ export class ProfileCardComponent implements OnInit {
       this.profileInfo = profile;
     });
 
-    this.isLoading$ = this.profileQuery.selectLoading();
-
-    this.profileForm.setValue({
-      email: this.profileInfo?.email,
-      display_name: this.profileInfo?.display_name
+    this.profileForm = new FormGroup({
+      email: new FormControl({ value: this.profileInfo?.email, disabled: true}),
+      display_name: new FormControl(this.profileInfo?.display_name, Validators.minLength(6)),
+      avatar: new FormControl({ value : ''})
     });
+
+    this.isLoading$ = this.profileQuery.selectLoading();
 
   }
 
